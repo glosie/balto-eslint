@@ -48,9 +48,7 @@ async function getPeerDependencies (error) {
 async function installEslintPackagesAsync () {
   const yarn = await getYarn()
 
-  const versions = yarn.data.trees
-    .filter(p => p.name.match(/eslint/) || p.name.match(/prettier/))
-    .map(p => p.name)
+  const versions = yarn.data.trees.map(p => p.name)
 
   await io.mv('package.json', 'package.json-bak')
 
