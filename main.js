@@ -75,7 +75,11 @@ async function runEslint () {
   )
 
   const eslint = require(`${GITHUB_WORKSPACE}/node_modules/eslint`)
-  const cli = new eslint.CLIEngine()
+  const cli = new eslint.CLIEngine({
+    rules: {
+      "import/order": 0
+    }
+  })
   const extensions = INPUT_EXTENSIONS.split(',')
 
   const paths = output
