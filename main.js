@@ -6,7 +6,8 @@ const CheckRun = require('./check_run')
 const {
   GITHUB_WORKSPACE,
   INPUT_EXTENSIONS,
-  INPUT_CONCLUSIONLEVEL
+  INPUT_CONCLUSIONLEVEL,
+  INPUT_RULES
 } = process.env
 
 const event = require(process.env.GITHUB_EVENT_PATH)
@@ -76,9 +77,7 @@ async function runEslint () {
 
   const eslint = require(`${GITHUB_WORKSPACE}/node_modules/eslint`)
   const cli = new eslint.CLIEngine({
-    rules: {
-      "import/order": 0
-    }
+    rules: JSON.parse(INPUT_RULES),
   })
   const extensions = INPUT_EXTENSIONS.split(',')
 
